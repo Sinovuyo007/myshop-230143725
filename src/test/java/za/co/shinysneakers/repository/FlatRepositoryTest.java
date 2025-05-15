@@ -34,6 +34,32 @@ class FlatRepositoryTest {
     assertNotNull(createFlat);
        System.out.println(createFlat);
    }
+   @Test
+    void b_read(){
+        Flat read = repository.findById(flat.getAddressID()).orElse(null);
+        assertNotNull(read);
+       System.out.println(read);
+   }
+    @Test
+    void c_update(){
+        Flat newFlat =new Flat.Builder().copy(flat).setFlatName("Kings Flat").build();
+        Flat updated = repository.save(newFlat);
+        System.out.println(updated);
+        assertNotNull(updated);
+        System.out.println(updated);
+    }
 
+    @Test
+    void d_delete(){
+        repository.deleteById(flat.getAddressID());
+        System.out.println("Deleted: "+flat.getAddressID());
+    }
+    @Test
+    void e_getAll(){
+        System.out.println("All Flats:");
+        for(Flat flat:repository.findAll()){
+            System.out.println(flat);
+        }
+}
 
 }
